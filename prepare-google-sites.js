@@ -31,11 +31,23 @@ html = html.replace(/src="\/logo-leo-design\.png"/g, `src="${BASE_URL}/logo-leo-
 // As imagens estão em dist/products/
 html = html.replace(/src="\/products\//g, `src="${BASE_URL}/products/`);
 
-// 4. Corrigir favicon se houver
-html = html.replace(/href="\/favicon/g, `href="${BASE_URL}/favicon`);
-
-// 5. Garantir que links internos do site funcionem se forem âncoras
-// (Opcional, dependendo da lógica do React)
+// 4. Corrigir caminhos dentro dos arquivos JS (para as imagens do products array)
+const assetsDir = path.join(distPath, 'assets');
+if (fs.existsSync(assetsDir)) {
+  const files = fs.readdirSync(assetsDir);
+  files.forEach(file => {
+    if (file.endsWith('.js')) {
+      const filePath = path.join(assetsDir, file);
+      let content = fs.readFileSync(filePath, 'utf8');
+      // Substituir "/products/ por "https://cdn.jsdelivr.../products/
+      const newContent = content.replace(/"\/products\//g, `"${BASE_URL}/products/`);
+      if (content !== newContent) {
+        fs.writeFileSync(filePath, newContent);
+        console.log(`✨ Arquivo JS corrigido: ${file}`);
+      }
+    }
+  });
+}
 
 fs.writeFileSync(outputPath, html);
 
