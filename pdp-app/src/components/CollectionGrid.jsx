@@ -447,9 +447,9 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white font-['Inter'] selection:bg-neutral-100 selection:text-black antialiased">
+    <div className="min-h-screen bg-transparent font-['Inter'] selection:bg-neutral-100 selection:text-black antialiased pb-32">
       {/* Dynamic Header */}
-      <section className="relative pt-20 pb-12 md:pt-32 md:pb-24 px-6 md:px-12 lg:px-24 overflow-hidden">
+      <section className="relative pt-12 pb-8 md:pt-20 md:pb-16 px-6 md:px-12 lg:px-24 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div ref={containerRef} className="opacity-0">
             <span className="inline-block text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-neutral-400 mb-4 md:mb-6">
@@ -467,62 +467,52 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
         </div>
       </section>
 
-      {/* Category Filter */}
-      <div className={`fixed top-[72px] md:top-[92px] left-0 right-0 z-40 bg-white/60 backdrop-blur-xl border-b border-neutral-200/50 shadow-md transition-all duration-300 lg:sticky lg:top-[92px] lg:border-y lg:shadow-none lg:p-0 ${isMobileFilterOpen ? 'translate-y-0 opacity-100 visible pb-6 pt-4' : '-translate-y-full opacity-0 invisible lg:translate-y-0 lg:opacity-100 lg:visible'}`}>
-        <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-24">
+      {/* Floating Filter Dock - Ponto de Ouro */}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-fit transition-all duration-500">
+        <div className="bg-white/70 backdrop-blur-2xl border border-white/50 shadow-[0_20px_50px_rgba(0,0,0,0.15)] rounded-3xl p-2 md:p-3 flex items-center gap-2 md:gap-4 overflow-x-auto no-scrollbar scroll-smooth">
           
-          <div className="flex flex-col lg:flex-row items-start lg:items-center py-0 lg:py-5 gap-4 lg:gap-8 justify-between">
-            
-            {/* Types */}
-            <div className="flex flex-col w-full lg:w-auto gap-2">
-              <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-widest">Filtrar por Linha</span>
-              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 lg:pb-0">
-                {types.map((type) => (
-                  <button
-                    key={type.id}
-                    onClick={() => setActiveType(type.id)}
-                    className={`flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap border ${
-                      activeType === type.id
-                        ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-md shadow-[#0071e3]/20'
-                        : 'bg-white/40 text-neutral-600 border-neutral-200/50 hover:bg-white/80 hover:border-neutral-300'
-                    }`}
-                    aria-label={`Filtrar por ${type.name}`}
-                  >
-                    <type.icon size={16} strokeWidth={activeType === type.id ? 2.5 : 2} className={activeType === type.id ? 'opacity-100' : 'text-neutral-500'} />
-                    <span className="text-[13px] font-medium tracking-wide">
-                      {type.name} <span className={activeType === type.id ? 'opacity-90 font-normal ml-0.5' : 'text-neutral-400 font-normal ml-0.5'}>({getTypeCount(type.id)})</span>
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
+          {/* Types Group */}
+          <div className="flex items-center gap-1.5 md:gap-2">
+            {types.map((type) => (
+              <button
+                key={type.id}
+                onClick={() => setActiveType(type.id)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-2xl transition-all duration-300 whitespace-nowrap ${
+                  activeType === type.id
+                    ? 'bg-[#0071e3] text-white shadow-lg shadow-[#0071e3]/20'
+                    : 'text-neutral-500 hover:bg-neutral-100'
+                }`}
+                aria-label={`Filtrar por ${type.name}`}
+              >
+                <type.icon size={16} strokeWidth={activeType === type.id ? 2.5 : 2} />
+                <span className="text-xs font-semibold tracking-wide">
+                  {type.name}
+                </span>
+              </button>
+            ))}
+          </div>
 
-            <div className="hidden lg:block w-px h-10 bg-neutral-200 self-end mb-2"></div>
+          <div className="w-px h-6 bg-neutral-200 mx-1"></div>
 
-            {/* Conditions */}
-            <div className="flex flex-col w-full lg:w-auto gap-2">
-              <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-widest">Filtrar por Condição</span>
-              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 lg:pb-0">
-                {conditions.map((cond) => (
-                  <button
-                    key={cond.id}
-                    onClick={() => setActiveCondition(cond.id)}
-                    className={`flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap border ${
-                      activeCondition === cond.id
-                        ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-md shadow-[#0071e3]/20'
-                        : 'bg-white text-neutral-600 border-neutral-200 hover:bg-neutral-50 hover:border-neutral-300'
-                    }`}
-                    aria-label={`Filtrar por condição ${cond.name}`}
-                  >
-                    <cond.icon size={16} strokeWidth={activeCondition === cond.id ? 2.5 : 2} className={activeCondition === cond.id ? 'opacity-100' : 'text-neutral-500'} />
-                    <span className="text-[13px] font-medium tracking-wide">
-                      {cond.name} <span className={activeCondition === cond.id ? 'opacity-90 font-normal ml-0.5' : 'text-neutral-400 font-normal ml-0.5'}>({getConditionCount(cond.id)})</span>
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
+          {/* Conditions Group */}
+          <div className="flex items-center gap-1.5 md:gap-2">
+            {conditions.map((cond) => (
+              <button
+                key={cond.id}
+                onClick={() => setActiveCondition(cond.id)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-2xl transition-all duration-300 whitespace-nowrap ${
+                  activeCondition === cond.id
+                    ? 'bg-[#fbbf24] text-white shadow-lg shadow-amber-400/20'
+                    : 'text-neutral-500 hover:bg-neutral-100'
+                }`}
+                aria-label={`Filtrar por condição ${cond.name}`}
+              >
+                <cond.icon size={16} strokeWidth={activeCondition === cond.id ? 2.5 : 2} />
+                <span className="text-xs font-semibold tracking-wide">
+                  {cond.name}
+                </span>
+              </button>
+            ))}
           </div>
         </div>
       </div>
