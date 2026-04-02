@@ -226,6 +226,15 @@ const products = [
   }
 ];
 
+const getImagePath = (path) => {
+  const baseUrl = window.ASSETS_BASE_URL || '';
+  if (path.startsWith('http')) return path;
+  // Remove leading slash if baseUrl ends with one or path starts with one
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  const cleanBase = baseUrl.endsWith('/') ? baseUrl : (baseUrl ? baseUrl + '/' : '');
+  return `${cleanBase}${cleanPath}`;
+};
+
 const types = [
   { id: 'all', name: 'Todos Modelos', icon: Cpu },
   { id: 'mac', name: 'MacBook', icon: Laptop },
@@ -322,7 +331,7 @@ const ProductCard = ({ product }) => {
             className="w-10 h-10 bg-white border border-neutral-100 text-[#0071e3] rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 group-[.is-centered]:opacity-100 transition-all duration-500 hover:bg-[#0071e3] group-[.is-centered]:bg-[#0071e3] hover:text-white group-[.is-centered]:text-white transform group-hover:translate-y-0 group-[.is-centered]:translate-y-0 translate-y-2 shadow-sm"
             aria-label={`Comprar ${product.name} pelo WhatsApp`}
           >
-            <img src="/logo azul WhatsAppWebP.webp" alt="WhatsApp" className="w-full h-full object-cover rounded-full transition-all duration-500" />
+            <img src={getImagePath("/logo azul WhatsAppWebP.webp")} alt="WhatsApp" className="w-full h-full object-cover rounded-full transition-all duration-500" />
           </a>
         </div>
 
@@ -338,7 +347,7 @@ const ProductCard = ({ product }) => {
           
           {product.image ? (
             <img 
-              src={product.image} 
+              src={getImagePath(product.image)} 
               alt={product.name}
               className={`w-full h-full object-contain mix-blend-multiply transition-all duration-700 transform group-hover:scale-110 group-[.is-centered]:scale-110 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
               onLoad={() => setImgLoaded(true)}
@@ -449,20 +458,21 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
   return (
     <div className="min-h-screen bg-transparent font-['Inter'] selection:bg-neutral-100 selection:text-black antialiased pb-32">
       {/* Dynamic Header */}
-      <section className="relative pt-12 pb-8 md:pt-20 md:pb-16 px-6 md:px-12 lg:px-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative pt-6 pb-8 md:pt-12 md:pb-16 px-6 md:px-12 lg:px-24 overflow-hidden text-center">
+        <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div ref={containerRef} className="opacity-0">
-            <span className="inline-block text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-neutral-400 mb-4 md:mb-6">
-              Pronta Entrega • Leo Design
-            </span>
-            <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold tracking-tight text-neutral-900 mb-6 md:mb-8 leading-[1.1]">
+            <div className="flex items-center justify-center gap-4 mb-4 md:mb-6">
+              <div className="bg-neutral-900 p-2.5 rounded-2xl shadow-xl shadow-black/10">
+                <img src={getImagePath("/logo-leo-design.png")} alt="Leo Design" className="h-6 w-auto animate-leo-power invert brightness-0" />
+              </div>
+              <span className="inline-block text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-neutral-400">
+                Pronta Entrega • Leo Design
+              </span>
+            </div>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-neutral-900 mb-6 md:mb-8 leading-[1.1]">
               Escolha seu novo <br className="hidden md:block" />
               dispositivo Apple.
             </h1>
-            <p className="text-lg md:text-xl text-neutral-500 max-w-2xl leading-relaxed">
-              Encontre o Mac ideal para transformar sua produtividade. 
-              Minimalismo, potência e o design que você já conhece.
-            </p>
           </div>
         </div>
       </section>

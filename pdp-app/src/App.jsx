@@ -30,7 +30,49 @@ function App() {
 
   return (
     <div ref={containerRef} className="min-h-screen font-sans text-apple-gray antialiased bg-gradient-to-b from-[#dff2fc] via-[#f1f8fc] to-white">
-      <main className="pt-10">
+      {/* Dynamic Navigation Header */}
+      <header className="p-6 md:p-8 flex justify-between items-center bg-white/60 backdrop-blur-lg border-b border-white/50 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
+          <div className="flex items-center">
+            <a 
+              href="#" 
+              onClick={(e) => { e.preventDefault(); navigateTo('products'); }}
+              className="bg-neutral-900 p-2 rounded-xl flex items-center justify-center shadow-lg shadow-black/5 transition-transform hover:scale-105"
+              aria-label="Página Inicial - Leo Design"
+            >
+              <img src="/logo-leo-design.png" alt="Leo Design Logo" className="h-6 md:h-7 w-auto object-contain brightness-0 invert" />
+            </a>
+          </div>
+          
+          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-500">
+            <button 
+              onClick={() => navigateTo('products')} 
+              className={`transition-colors ${currentPage === 'products' ? 'text-apple-black font-bold' : 'hover:text-apple-black'}`}
+            >
+              Vitrine
+            </button>
+            <button 
+              onClick={() => navigateTo('support')} 
+              className={`transition-colors ${currentPage === 'support' ? 'text-apple-black font-bold' : 'hover:text-apple-black'}`}
+            >
+              Assistência
+            </button>
+            <a href="https://api.whatsapp.com/send?phone=5511981765177" target="_blank" rel="noopener noreferrer" className="hover:text-apple-black transition-colors" aria-label="Falar pelo WhatsApp">Fale com Especialista</a>
+          </div>
+
+          {/* Quick Mobile Navigation */}
+          <div className="md:hidden flex items-center gap-2">
+            <button 
+              onClick={() => navigateTo('support')}
+              className="px-3 py-1.5 text-xs font-semibold text-[#0071e3] bg-[#0071e3]/5 border border-[#0071e3]/10 rounded-lg"
+            >
+              Suporte
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main>
         {currentPage === 'products' ? (
           <CollectionGrid 
             isMobileFilterOpen={isMobileFilterOpen} 
