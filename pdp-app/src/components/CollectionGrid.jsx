@@ -450,38 +450,39 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
   useEffect(() => {
     if (!containerRef.current) return;
     
-    const h1 = containerRef.current.querySelector('h1');
-    const span = containerRef.current.querySelector('span');
+    let ctx = gsap.context(() => {
+      const h1 = containerRef.current.querySelector('h1');
+      const span = containerRef.current.querySelector('span');
 
-    // Hero Title Animation (Revelation)
-    gsap.fromTo(h1,
-      { opacity: 0, y: 100, clipPath: 'inset(0 0 100% 0)' },
-      { 
-        opacity: 1, 
-        y: 0, 
-        clipPath: 'inset(0 0 0% 0)', 
-        duration: 1.5, 
-        ease: "expo.out",
-        delay: 0.2
+      if (h1) {
+        gsap.fromTo(h1,
+          { opacity: 0, y: 120, clipPath: 'inset(0 0 100% 0)' },
+          { 
+            opacity: 1, 
+            y: 0, 
+            clipPath: 'inset(0 0 0% 0)', 
+            duration: 1.8, 
+            ease: "expo.out",
+            delay: 0.1
+          }
+        );
       }
-    );
 
-    // Subtitle Animation
-    if (span) {
-      gsap.fromTo(span,
-        { opacity: 0, y: 20 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 1, 
-          delay: 0.5, 
-          ease: "power3.out" 
-        }
-      );
-    }
+      if (span) {
+        gsap.fromTo(span,
+          { opacity: 0, y: 30 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1.2, 
+            delay: 0.4, 
+            ease: "power3.out" 
+          }
+        );
+      }
+    }, containerRef);
 
-    // Set container to visible (was opacity-0 in JSX)
-    gsap.set(containerRef.current, { opacity: 1 });
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -489,7 +490,7 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
       {/* Dynamic Header */}
       <section className="relative pt-6 pb-8 md:pt-12 md:pb-16 px-6 md:px-12 lg:px-24 overflow-hidden text-center">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
-          <div ref={containerRef} className="opacity-0">
+          <div ref={containerRef}>
             <div className="flex items-center justify-center mb-4 md:mb-6">
               <span className="inline-block text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-neutral-400">
                 Pronta Entrega • Leo Design
