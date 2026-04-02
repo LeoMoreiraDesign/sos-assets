@@ -45,10 +45,10 @@ function App() {
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); navigateTo('products'); }}
-              className="bg-neutral-900 p-2 rounded-xl flex items-center justify-center shadow-lg shadow-black/5 transition-transform hover:scale-105"
+              className="flex items-center justify-center transition-transform hover:scale-105"
               aria-label="Página Inicial - Leo Design"
             >
-              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design Logo" className="h-6 md:h-7 w-auto object-contain brightness-0 invert" />
+              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design Logo" className="h-8 md:h-10 w-auto object-contain" />
             </a>
           </div>
           
@@ -101,9 +101,9 @@ function App() {
             <a 
               href="#" 
               onClick={(e) => { e.preventDefault(); navigateTo('products'); }}
-              className="mb-8 p-3 bg-neutral-900 rounded-2xl w-fit shadow-xl shadow-black/5 block transition-transform hover:scale-105"
+              className="mb-8 w-fit block transition-transform hover:scale-105"
             >
-              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design Logo" className="h-8 w-auto animate-leo-power" />
+              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design Logo" className="h-10 md:h-12 w-auto animate-leo-power" />
             </a>
               Especialistas em ecossistema Apple. Qualidade impecável, garantia real e o melhor atendimento para você.
           </div>
