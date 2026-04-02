@@ -24,6 +24,8 @@ html = html.replace('<head>', `<head>\n    ${globalInjecao}`);
 // 2. Substituir caminhos de assets do cabeçalho (ex: JS e CSS da build)
 html = html.replace(/src="\/assets\//g, `src="${BASE_URL}assets/`);
 html = html.replace(/href="\/assets\//g, `href="${BASE_URL}assets/`);
+html = html.replace(/href="\/Webp_logo_leo_design_web_sites@4x\.webp"/g, `href="${BASE_URL}Webp_logo_leo_design_web_sites@4x.webp"`);
+html = html.replace(/src="\/Webp_logo_leo_design_web_sites@4x\.webp"/g, `src="${BASE_URL}Webp_logo_leo_design_web_sites@4x.webp"`);
 html = html.replace(/href="\/logo-leo-design\.png"/g, `href="${BASE_URL}logo-leo-design.png"`);
 html = html.replace(/src="\/logo-leo-design\.png"/g, `src="${BASE_URL}logo-leo-design.png"`);
 

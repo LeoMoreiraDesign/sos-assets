@@ -48,7 +48,7 @@ function App() {
               className="bg-neutral-900 p-2 rounded-xl flex items-center justify-center shadow-lg shadow-black/5 transition-transform hover:scale-105"
               aria-label="Página Inicial - Leo Design"
             >
-              <img src={getImagePath("/logo-leo-design.png")} alt="Leo Design Logo" className="h-6 md:h-7 w-auto object-contain brightness-0 invert" />
+              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design Logo" className="h-6 md:h-7 w-auto object-contain brightness-0 invert" />
             </a>
           </div>
           
@@ -103,7 +103,7 @@ function App() {
               onClick={(e) => { e.preventDefault(); navigateTo('products'); }}
               className="mb-8 p-3 bg-neutral-900 rounded-2xl w-fit shadow-xl shadow-black/5 block transition-transform hover:scale-105"
             >
-              <img src={getImagePath("/logo-leo-design.png")} alt="Leo Design Logo" className="h-8 w-auto animate-leo-power" />
+              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design Logo" className="h-8 w-auto animate-leo-power" />
             </a>
               Especialistas em ecossistema Apple. Qualidade impecável, garantia real e o melhor atendimento para você.
           </div>
@@ -149,7 +149,7 @@ function App() {
               className="flex flex-col items-center gap-2 group cursor-pointer transition-transform duration-300 hover:scale-105"
             >
               <span className="text-[9px] font-bold text-neutral-300 uppercase tracking-[0.3em] group-hover:text-neutral-500 transition-colors">Desenvolvido por</span>
-              <img src={getImagePath("/logo-leo-design.png")} alt="Leo Design" className="h-7 md:h-8 animate-leo-power" />
+              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design" className="h-7 md:h-8 animate-leo-power" />
             </a>
           </div>
 
