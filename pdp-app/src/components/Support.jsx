@@ -13,6 +13,14 @@ import {
   Award
 } from 'lucide-react';
 
+const getImagePath = (path) => {
+  const baseUrl = window.ASSETS_BASE_URL || '';
+  if (path.startsWith('http')) return path;
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  const cleanBase = baseUrl.endsWith('/') ? baseUrl : (baseUrl ? baseUrl + '/' : '');
+  return `${cleanBase}${cleanPath}`;
+};
+
 const ServiceCategory = ({ title, icon: Icon, services, image, index }) => {
   const categoryRef = useRef(null);
   const listRef = useRef(null);
@@ -101,7 +109,7 @@ const ServiceCategory = ({ title, icon: Icon, services, image, index }) => {
             className="w-fit mx-auto md:mx-0 py-3 px-10 bg-[#0071e3] hover:bg-neutral-900 text-white rounded-full text-xs font-bold transition-all duration-500 flex items-center justify-center gap-2 group/btn shadow-lg shadow-[#0071e3]/20"
             aria-label={`Solicitar orçamento para ${title} pelo WhatsApp`}
           >
-            <img src="/logo azul WhatsAppWebP.webp" alt="WhatsApp" className="w-5 h-5 object-cover rounded-full group-hover/btn:scale-110 transition-transform" />
+            <img src={getImagePath("/logo azul WhatsAppWebP.webp")} alt="WhatsApp" className="w-5 h-5 object-cover rounded-full group-hover/btn:scale-110 transition-transform" />
             Solicitar Orçamento
           </a>
         </div>
@@ -323,7 +331,7 @@ const Support = () => {
               className="group bg-[#0071e3] text-white hover:bg-white hover:text-[#0071e3] transition-all duration-500 px-12 py-3 md:py-4 rounded-full font-semibold text-sm md:text-base flex items-center gap-2.5 md:gap-3 shadow-xl hover:shadow-[#0071e3]/40"
               aria-label="Solicitar orçamento gratuito pelo WhatsApp"
             >
-              <img src="/logo azul WhatsAppWebP.webp" alt="WhatsApp" className="w-6 h-6 md:w-7 md:h-7 object-cover rounded-full transition-all duration-500 transform group-hover:scale-110" />
+              <img src={getImagePath("/logo azul WhatsAppWebP.webp")} alt="WhatsApp" className="w-6 h-6 md:w-7 md:h-7 object-cover rounded-full transition-all duration-500 transform group-hover:scale-110" />
               <span>Solicitar Orçamento Grátis</span>
             </a>
           </div>
