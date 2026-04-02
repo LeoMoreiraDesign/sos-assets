@@ -449,10 +449,39 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
 
   useEffect(() => {
     if (!containerRef.current) return;
-    gsap.fromTo(containerRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 1, ease: "power2.out" }
+    
+    const h1 = containerRef.current.querySelector('h1');
+    const span = containerRef.current.querySelector('span');
+
+    // Hero Title Animation (Revelation)
+    gsap.fromTo(h1,
+      { opacity: 0, y: 100, clipPath: 'inset(0 0 100% 0)' },
+      { 
+        opacity: 1, 
+        y: 0, 
+        clipPath: 'inset(0 0 0% 0)', 
+        duration: 1.5, 
+        ease: "expo.out",
+        delay: 0.2
+      }
     );
+
+    // Subtitle Animation
+    if (span) {
+      gsap.fromTo(span,
+        { opacity: 0, y: 20 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 1, 
+          delay: 0.5, 
+          ease: "power3.out" 
+        }
+      );
+    }
+
+    // Set container to visible (was opacity-0 in JSX)
+    gsap.set(containerRef.current, { opacity: 1 });
   }, []);
 
   return (
