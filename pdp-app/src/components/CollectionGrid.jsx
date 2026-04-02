@@ -477,52 +477,54 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
         </div>
       </section>
 
-      {/* Floating Filter Dock - Ponto de Ouro */}
-      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-fit transition-all duration-500">
-        <div className="bg-white/70 backdrop-blur-2xl border border-white/50 shadow-[0_20px_50px_rgba(0,0,0,0.15)] rounded-3xl p-2 md:p-3 flex items-center gap-2 md:gap-4 overflow-x-auto no-scrollbar scroll-smooth">
-          
-          {/* Types Group */}
-          <div className="flex items-center gap-1.5 md:gap-2">
-            {types.map((type) => (
-              <button
-                key={type.id}
-                onClick={() => setActiveType(type.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-2xl transition-all duration-300 whitespace-nowrap ${
-                  activeType === type.id
-                    ? 'bg-[#0071e3] text-white shadow-lg shadow-[#0071e3]/20'
-                    : 'text-neutral-500 hover:bg-neutral-100'
-                }`}
-                aria-label={`Filtrar por ${type.name}`}
-              >
-                <type.icon size={16} strokeWidth={activeType === type.id ? 2.5 : 2} />
-                <span className="text-xs font-semibold tracking-wide">
-                  {type.name}
-                </span>
-              </button>
-            ))}
-          </div>
+      {/* Refined Top Filter Bar */}
+      <div className="sticky top-[72px] md:top-[96px] z-40 bg-white/80 backdrop-blur-2xl border-b border-neutral-100/50 shadow-sm transition-all duration-300 mb-12">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+          <div className="flex items-center gap-6 md:gap-8 py-4 overflow-x-auto no-scrollbar scroll-smooth">
+            
+            {/* Types Group */}
+            <div className="flex items-center gap-1.5 md:gap-2 pr-4 md:pr-0">
+              {types.map((type) => (
+                <button
+                  key={type.id}
+                  onClick={() => setActiveType(type.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 whitespace-nowrap border ${
+                    activeType === type.id
+                      ? 'bg-neutral-900 text-white border-neutral-900 shadow-lg shadow-black/10'
+                      : 'bg-white text-neutral-500 border-neutral-100 hover:border-neutral-300'
+                  }`}
+                  aria-label={`Filtrar por ${type.name}`}
+                >
+                  <type.icon size={14} strokeWidth={activeType === type.id ? 2.5 : 2} />
+                  <span className="text-[11px] font-bold uppercase tracking-wider">
+                    {type.name}
+                  </span>
+                </button>
+              ))}
+            </div>
 
-          <div className="w-px h-6 bg-neutral-200 mx-1"></div>
+            <div className="hidden md:block w-px h-6 bg-neutral-100"></div>
 
-          {/* Conditions Group */}
-          <div className="flex items-center gap-1.5 md:gap-2">
-            {conditions.map((cond) => (
-              <button
-                key={cond.id}
-                onClick={() => setActiveCondition(cond.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-2xl transition-all duration-300 whitespace-nowrap ${
-                  activeCondition === cond.id
-                    ? 'bg-[#fbbf24] text-white shadow-lg shadow-amber-400/20'
-                    : 'text-neutral-500 hover:bg-neutral-100'
-                }`}
-                aria-label={`Filtrar por condição ${cond.name}`}
-              >
-                <cond.icon size={16} strokeWidth={activeCondition === cond.id ? 2.5 : 2} />
-                <span className="text-xs font-semibold tracking-wide">
-                  {cond.name}
-                </span>
-              </button>
-            ))}
+            {/* Conditions Group */}
+            <div className="flex items-center gap-1.5 md:gap-2">
+              {conditions.map((cond) => (
+                <button
+                  key={cond.id}
+                  onClick={() => setActiveCondition(cond.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 whitespace-nowrap border ${
+                    activeCondition === cond.id
+                      ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-lg shadow-[#0071e3]/10'
+                      : 'bg-white text-neutral-500 border-neutral-100 hover:border-neutral-300'
+                  }`}
+                  aria-label={`Filtrar por condição ${cond.name}`}
+                >
+                  <cond.icon size={14} strokeWidth={activeCondition === cond.id ? 2.5 : 2} />
+                  <span className="text-[11px] font-bold uppercase tracking-wider">
+                    {cond.name}
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
