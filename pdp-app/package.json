@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:google": "vite build && node ../prepare-google-sites.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
