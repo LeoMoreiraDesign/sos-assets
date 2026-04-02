@@ -461,10 +461,7 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
       <section className="relative pt-6 pb-8 md:pt-12 md:pb-16 px-6 md:px-12 lg:px-24 overflow-hidden text-center">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div ref={containerRef} className="opacity-0">
-            <div className="flex items-center justify-center gap-4 mb-4 md:mb-6">
-              <div className="bg-neutral-900 p-2.5 rounded-2xl shadow-xl shadow-black/10">
-                <img src={getImagePath("/logo-leo-design.png")} alt="Leo Design" className="h-6 w-auto animate-leo-power invert brightness-0" />
-              </div>
+            <div className="flex items-center justify-center mb-4 md:mb-6">
               <span className="inline-block text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-neutral-400">
                 Pronta Entrega • Leo Design
               </span>
