@@ -12,6 +12,7 @@ import {
   RefreshCw,
   ListFilter
 } from 'lucide-react';
+import ScrollSequenceBanner from './ScrollSequenceBanner';
 
 const products = [
   {
@@ -436,6 +437,11 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
     gsap.fromTo(cards, 
       { opacity: 0, y: 40, filter: 'blur(10px)' },
       {
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: "top 85%", // Trigger when top of the grid hits 85% of the viewport height
+          once: true // Only trigger once, preventing re-animation if scrolled back up
+        },
         opacity: 1,
         y: 0,
         filter: 'blur(0px)',
@@ -453,11 +459,17 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
     let ctx = gsap.context(() => {
       const h1 = containerRef.current.querySelector('h1');
       const span = containerRef.current.querySelector('span');
+      const p = containerRef.current.querySelector('p'); // Added p tag
 
       if (h1) {
         gsap.fromTo(h1,
           { opacity: 0, y: 120, clipPath: 'inset(0 0 100% 0)' },
           { 
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 80%",
+              once: true
+            },
             opacity: 1, 
             y: 0, 
             clipPath: 'inset(0 0 0% 0)', 
@@ -472,11 +484,34 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
         gsap.fromTo(span,
           { opacity: 0, y: 30 },
           { 
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 80%",
+              once: true
+            },
             opacity: 1, 
             y: 0, 
             duration: 1.2, 
             delay: 0.4, 
             ease: "power3.out" 
+          }
+        );
+      }
+
+      if (p) {
+        gsap.fromTo(p,
+          { opacity: 0, y: 40 },
+          { 
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 80%",
+              once: true
+            },
+            opacity: 1, 
+            y: 0, 
+            duration: 1.4, 
+            delay: 0.3, 
+            ease: "power2.out" 
           }
         );
       }
@@ -487,19 +522,24 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
 
   return (
     <div className="min-h-screen bg-transparent font-['Inter'] selection:bg-neutral-100 selection:text-black antialiased pb-32">
-      {/* Dynamic Header */}
-      <section className="relative pt-6 pb-8 md:pt-12 md:pb-16 px-6 md:px-12 lg:px-24 overflow-hidden text-center">
+      <ScrollSequenceBanner />
+
+      {/* Dynamic Header - Moved below Banner */}
+      <section className="relative pt-20 pb-8 md:pt-32 md:pb-16 px-6 md:px-12 lg:px-24 overflow-hidden text-center bg-white">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <div ref={containerRef}>
             <div className="flex items-center justify-center mb-4 md:mb-6">
-              <span className="inline-block text-xs md:text-sm font-semibold tracking-[0.3em] uppercase text-neutral-400">
-                Pronta Entrega • Leo Design
+              <span className="inline-block text-xs md:text-sm font-semibold tracking-[1em] uppercase text-neutral-300">
+                Catálogo Exclusivo
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-neutral-900 mb-6 md:mb-8 leading-[1.1]">
               Escolha seu novo <br className="hidden md:block" />
               dispositivo Apple.
             </h1>
+            <p className="text-neutral-500 max-w-2xl mx-auto text-base md:text-lg font-medium leading-relaxed mb-8">
+              Explore nossa seleção cuidadosamente selecionada de equipamentos Apple, garantindo a melhor performance para o seu fluxo de trabalho.
+            </p>
           </div>
         </div>
       </section>
