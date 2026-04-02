@@ -98,14 +98,11 @@ function App() {
       >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-16">
           <div className="max-w-sm">
-            <a 
-              href="#" 
-              onClick={(e) => { e.preventDefault(); navigateTo('products'); }}
-              className="mb-8 w-fit block transition-transform hover:scale-105"
-            >
-              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design Logo" className="h-10 md:h-12 w-auto animate-leo-power" />
-            </a>
+          <div className="max-w-sm flex flex-col justify-center">
+            <p className="text-neutral-500 font-medium leading-relaxed">
               Especialistas em ecossistema Apple. Qualidade impecável, garantia real e o melhor atendimento para você.
+            </p>
+          </div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-12 lg:gap-24">
             <div>
@@ -140,16 +137,15 @@ function App() {
             © 2026 LEO DESIGN. TODOS OS DIREITOS RESERVADOS.
           </p>
           
-          <div className="flex flex-col items-center gap-3 lg:order-2">
+          <div className="flex flex-col items-center gap-1 lg:order-2">
             <a 
               href="https://leodesign.netlify.app/" 
               target="_blank" 
               rel="noopener noreferrer"
-              title="Leo Design Portfolio"
-              className="flex flex-col items-center gap-2 group cursor-pointer transition-transform duration-300 hover:scale-105"
+              className="group cursor-pointer flex flex-col items-center"
             >
-              <span className="text-[9px] font-bold text-neutral-300 uppercase tracking-[0.3em] group-hover:text-neutral-500 transition-colors">Desenvolvido por</span>
-              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design" className="h-7 md:h-8 animate-leo-power" />
+              <span className="text-[9px] font-bold text-neutral-300 uppercase tracking-[0.4em] group-hover:text-neutral-900 transition-all duration-500">Desenvolvido por</span>
+              <span className="text-[11px] font-black text-neutral-900 tracking-[0.1em] mt-1 opacity-80 group-hover:opacity-100 transition-opacity">LEO DESIGN</span>
             </a>
           </div>
 
