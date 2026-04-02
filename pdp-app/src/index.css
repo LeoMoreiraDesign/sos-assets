@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background-color: #ffffff;
+  color: #1D1D1F;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom styles for the sticky gallery */
+.sticky-gallery {
+  position: sticky;
+  top: 80px;
+}
+
+/* GSAP Hidden Initial State */
+.gsap-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes leo-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 0px rgba(0, 113, 227, 0));
+    opacity: 0.9;
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(0, 113, 227, 0.9));
+    opacity: 1;
+  }
+}
+
+.animate-leo-power {
+  animation: leo-pulse 2s ease-in-out infinite;
+}
+
+/* Footer Gradient Animation */
+.footer-gradient-interactive {
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(223, 242, 252, 0.8) 0%,
+    rgba(241, 248, 252, 0.5) 40%,
+    rgba(255, 255, 255, 1) 100%
+  ) !important;
+  background-color: white !important;
+  transition: background 0.1s ease-out;
+}
+
+@media (max-width: 768px) {
+  .footer-gradient-interactive {
+    background: linear-gradient(180deg, #dff2fc 0%, #f1f8fc 40%, #ffffff 100%) !important;
+  }
+}
