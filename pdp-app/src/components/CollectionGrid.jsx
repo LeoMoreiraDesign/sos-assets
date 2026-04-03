@@ -12,7 +12,6 @@ import {
   RefreshCw,
   ListFilter
 } from 'lucide-react';
-import ScrollSequenceBanner from './ScrollSequenceBanner';
 
 const products = [
   {
@@ -522,8 +521,6 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
 
   return (
     <div className="min-h-screen bg-transparent font-['Inter'] selection:bg-neutral-100 selection:text-black antialiased pb-32">
-      <ScrollSequenceBanner />
-
       {/* Dynamic Header - Moved below Banner */}
       <section className="relative pt-20 pb-8 md:pt-32 md:pb-16 px-6 md:px-12 lg:px-24 overflow-hidden text-center bg-white">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
