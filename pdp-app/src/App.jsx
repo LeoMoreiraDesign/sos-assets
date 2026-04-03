@@ -65,7 +65,7 @@ function App() {
               className="flex items-center justify-center transition-transform hover:scale-105"
               aria-label="Página Inicial - Leo Design"
             >
-              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design Logo" className="h-8 md:h-10 w-auto object-contain" />
+              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design Logo" className="h-10 md:h-14 w-auto object-contain" />
             </a>
           </div>
           
