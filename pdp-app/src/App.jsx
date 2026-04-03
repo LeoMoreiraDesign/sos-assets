@@ -232,15 +232,28 @@ function App() {
       {/* Integrated Filter Popup Modal */}
       {currentPage === 'products' && isFilterBarOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <style>{`
+            @keyframes modalBackdropFade {
+              from { opacity: 0; backdrop-filter: blur(0px); }
+              to { opacity: 1; backdrop-filter: blur(4px); }
+            }
+            @keyframes modalContentSpring {
+              from { opacity: 0; transform: scale(0.95) translateY(10px); filter: blur(4px); }
+              to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0px); }
+            }
+            .animate-modal-backdrop { animation: modalBackdropFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+            .animate-modal-content { animation: modalContentSpring 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+          `}</style>
+          
           {/* Backdrop */}
           <div 
-            className="absolute inset-0 bg-black/20 backdrop-blur-sm transition-opacity cursor-pointer"
+            className="absolute inset-0 bg-black/20 cursor-pointer animate-modal-backdrop"
             onClick={() => setIsFilterBarOpen(false)}
             aria-label="Fechar Filtros"
           />
           
           {/* Popup Container */}
-          <div className="relative w-full max-w-sm bg-white/70 backdrop-blur-3xl rounded-[2rem] shadow-[0_0_60px_-15px_rgba(0,113,227,0.3)] border border-white/60 p-6 pb-8 transform transition-all">
+          <div className="relative w-full max-w-sm bg-white/70 backdrop-blur-3xl rounded-[2rem] shadow-[0_0_60px_-15px_rgba(0,113,227,0.3)] border border-white/60 p-6 pb-8 animate-modal-content">
             
             {/* Header with Close Button */}
             <div className="flex items-center justify-between mb-8">
