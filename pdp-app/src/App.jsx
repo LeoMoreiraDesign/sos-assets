@@ -55,7 +55,9 @@ function App() {
     <div ref={containerRef} className="min-h-screen font-sans text-apple-gray antialiased bg-gradient-to-b from-[#dff2fc] via-[#f1f8fc] to-white">
       {/* Dynamic Navigation Header */}
       <header className="flex flex-col bg-white/70 backdrop-blur-xl border-b border-neutral-100/50 sticky top-0 z-50 transition-all duration-300 shadow-sm">
-        <div className="py-2 px-4 md:py-3 md:px-6 lg:px-8 flex items-center justify-between max-w-7xl mx-auto w-full">
+        <div className="py-2 px-4 md:py-3 md:px-6 lg:px-8 flex items-center justify-between max-w-7xl mx-auto w-full relative">
+          
+          {/* Logo (Left) */}
           <div className="flex items-center">
             <a 
               href="#" 
@@ -67,18 +69,13 @@ function App() {
             </a>
           </div>
           
-          <div className="hidden md:flex items-center gap-6 text-sm font-semibold text-neutral-500">
-            <div className="flex items-center gap-1.5">
-              <button 
-                onClick={() => { navigateTo('products'); setIsFilterBarOpen(false); }} 
-                className={`transition-colors py-1 ${currentPage === 'products' ? 'text-apple-black font-bold border-b-2 border-apple-black' : 'hover:text-apple-black border-b-2 border-transparent'}`}
-              >
-                Vitrine
-              </button>
+          {/* Center Navigation (Desktop Only) */}
+          <div className="hidden md:flex items-center gap-6 text-sm font-semibold text-neutral-500 absolute left-1/2 -translate-x-1/2">
+            <div className="flex items-center gap-0.5">
               {currentPage === 'products' && (
                 <button
                   onClick={() => setIsFilterBarOpen(!isFilterBarOpen)}
-                  className={`p-1.5 rounded-full transition-all duration-200 border ${
+                  className={`p-1.5 mr-1 flex items-center justify-center rounded-full transition-all duration-200 border ${
                     isFilterBarOpen 
                       ? 'bg-neutral-100 border-neutral-200 text-apple-black shadow-sm' 
                       : 'bg-transparent border-transparent hover:bg-neutral-50 text-neutral-400 hover:text-neutral-600'
@@ -88,6 +85,12 @@ function App() {
                   <ListFilter size={14} strokeWidth={2.5} />
                 </button>
               )}
+              <button 
+                onClick={() => { navigateTo('products'); setIsFilterBarOpen(false); }} 
+                className={`transition-colors py-1 ${currentPage === 'products' ? 'text-apple-black font-bold border-b-2 border-apple-black' : 'hover:text-apple-black border-b-2 border-transparent'}`}
+              >
+                Vitrine
+              </button>
             </div>
             <button 
               onClick={() => navigateTo('support')} 
@@ -95,30 +98,42 @@ function App() {
             >
               Assistência
             </button>
-            <a href="https://api.whatsapp.com/send?phone=5511981765177" target="_blank" rel="noopener noreferrer" className="hover:text-apple-black transition-colors" aria-label="Falar pelo WhatsApp">Fale com Especialista</a>
           </div>
 
-          {/* Quick Mobile Navigation */}
-          <div className="md:hidden flex items-center gap-2">
-            {currentPage === 'products' && (
-              <button 
-                onClick={() => setIsFilterBarOpen(!isFilterBarOpen)}
-                className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-lg border transition-all ${
-                  isFilterBarOpen 
-                    ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-md shadow-[#0071e3]/20' 
-                    : 'text-[#0071e3] bg-[#0071e3]/5 border-[#0071e3]/10 hover:bg-[#0071e3]/10'
-                }`}
-              >
-                <ListFilter size={12} strokeWidth={2.5} />
-                <span>Filtros</span>
-              </button>
-            )}
-            <button 
-              onClick={() => navigateTo('support')}
-              className="px-3 py-1 text-xs font-semibold text-neutral-600 bg-neutral-100 border border-neutral-200 rounded-lg"
+          {/* Right Area */}
+          <div className="flex items-center">
+            <a 
+              href="https://api.whatsapp.com/send?phone=5511981765177" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hidden md:block hover:text-apple-black transition-colors text-sm font-semibold text-neutral-500" 
+              aria-label="Falar pelo WhatsApp"
             >
-              Suporte
-            </button>
+              Fale com Especialista
+            </a>
+
+            {/* Quick Mobile Navigation */}
+            <div className="md:hidden flex items-center gap-2">
+              {currentPage === 'products' && (
+                <button 
+                  onClick={() => setIsFilterBarOpen(!isFilterBarOpen)}
+                  className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-lg border transition-all ${
+                    isFilterBarOpen 
+                      ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-md shadow-[#0071e3]/20' 
+                      : 'text-[#0071e3] bg-[#0071e3]/5 border-[#0071e3]/10 hover:bg-[#0071e3]/10'
+                  }`}
+                >
+                  <ListFilter size={12} strokeWidth={2.5} />
+                  <span>Filtros</span>
+                </button>
+              )}
+              <button 
+                onClick={() => navigateTo('support')}
+                className="px-3 py-1 text-xs font-semibold text-neutral-600 bg-neutral-100 border border-neutral-200 rounded-lg"
+              >
+                Suporte
+              </button>
+            </div>
           </div>
         </div>
 
