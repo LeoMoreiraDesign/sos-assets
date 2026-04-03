@@ -34,6 +34,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState('products'); // 'products' or 'support'
   const [activeType, setActiveType] = useState('all');
   const [activeCondition, setActiveCondition] = useState('all');
+  const [isFilterBarOpen, setIsFilterBarOpen] = useState(false);
 
   const handleFooterMouseMove = (e) => {
     if (!footerRef.current) return;
@@ -67,12 +68,27 @@ function App() {
           </div>
           
           <div className="hidden md:flex items-center gap-6 text-sm font-semibold text-neutral-500">
-            <button 
-              onClick={() => navigateTo('products')} 
-              className={`transition-colors py-1 ${currentPage === 'products' ? 'text-apple-black font-bold border-b-2 border-apple-black' : 'hover:text-apple-black border-b-2 border-transparent'}`}
-            >
-              Vitrine
-            </button>
+            <div className="flex items-center gap-1.5">
+              <button 
+                onClick={() => { navigateTo('products'); setIsFilterBarOpen(false); }} 
+                className={`transition-colors py-1 ${currentPage === 'products' ? 'text-apple-black font-bold border-b-2 border-apple-black' : 'hover:text-apple-black border-b-2 border-transparent'}`}
+              >
+                Vitrine
+              </button>
+              {currentPage === 'products' && (
+                <button
+                  onClick={() => setIsFilterBarOpen(!isFilterBarOpen)}
+                  className={`p-1.5 rounded-full transition-all duration-200 border ${
+                    isFilterBarOpen 
+                      ? 'bg-neutral-100 border-neutral-200 text-apple-black shadow-sm' 
+                      : 'bg-transparent border-transparent hover:bg-neutral-50 text-neutral-400 hover:text-neutral-600'
+                  }`}
+                  aria-label="Alternar Filtros"
+                >
+                  <ListFilter size={14} strokeWidth={2.5} />
+                </button>
+              )}
+            </div>
             <button 
               onClick={() => navigateTo('support')} 
               className={`transition-colors py-1 ${currentPage === 'support' ? 'text-apple-black font-bold border-b-2 border-apple-black' : 'hover:text-apple-black border-b-2 border-transparent'}`}
@@ -84,9 +100,22 @@ function App() {
 
           {/* Quick Mobile Navigation */}
           <div className="md:hidden flex items-center gap-2">
+            {currentPage === 'products' && (
+              <button 
+                onClick={() => setIsFilterBarOpen(!isFilterBarOpen)}
+                className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-lg border transition-all ${
+                  isFilterBarOpen 
+                    ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-md shadow-[#0071e3]/20' 
+                    : 'text-[#0071e3] bg-[#0071e3]/5 border-[#0071e3]/10 hover:bg-[#0071e3]/10'
+                }`}
+              >
+                <ListFilter size={12} strokeWidth={2.5} />
+                <span>Filtros</span>
+              </button>
+            )}
             <button 
               onClick={() => navigateTo('support')}
-              className="px-3 py-1 text-xs font-semibold text-[#0071e3] bg-[#0071e3]/5 border border-[#0071e3]/10 rounded-lg"
+              className="px-3 py-1 text-xs font-semibold text-neutral-600 bg-neutral-100 border border-neutral-200 rounded-lg"
             >
               Suporte
             </button>
@@ -94,7 +123,7 @@ function App() {
         </div>
 
         {/* Integrated Filter Bar - Ultra Compact */}
-        {currentPage === 'products' && (
+        {currentPage === 'products' && isFilterBarOpen && (
           <div className="border-t border-neutral-100/50 bg-white/40">
             <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
               <div className="flex items-center gap-4 md:gap-6 py-1.5 md:py-2 overflow-x-auto no-scrollbar scroll-smooth">
