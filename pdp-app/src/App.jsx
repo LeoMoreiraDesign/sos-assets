@@ -256,7 +256,7 @@ function App() {
                   {types.map((type) => (
                     <button
                       key={type.id}
-                      onClick={() => { setActiveType(type.id); setIsFilterBarOpen(false); }}
+                      onClick={() => { setActiveType(type.id); }}
                       className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 border ${
                         activeType === type.id
                           ? 'bg-neutral-900 text-white border-neutral-900 shadow-md'
@@ -279,7 +279,7 @@ function App() {
                   {conditions.map((cond) => (
                     <button
                       key={cond.id}
-                      onClick={() => { setActiveCondition(cond.id); setIsFilterBarOpen(false); }}
+                      onClick={() => { setActiveCondition(cond.id); }}
                       className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 border ${
                         activeCondition === cond.id
                           ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-md shadow-[#0071e3]/20'
@@ -293,6 +293,16 @@ function App() {
                     </button>
                   ))}
                 </div>
+              </div>
+              
+              {/* Apply Button */}
+              <div className="pt-6 mt-2 border-t border-neutral-100/60">
+                <button
+                  onClick={() => setIsFilterBarOpen(false)}
+                  className="w-full bg-[#0071e3] hover:bg-[#0077ed] text-white font-bold text-sm py-3 rounded-xl transition-all shadow-md shadow-[#0071e3]/20 hover:shadow-lg hover:shadow-[#0071e3]/30"
+                >
+                  Aplicar Filtros
+                </button>
               </div>
             </div>
           </div>
