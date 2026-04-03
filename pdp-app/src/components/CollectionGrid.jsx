@@ -235,18 +235,6 @@ const getImagePath = (path) => {
   return `${cleanBase}${cleanPath}`;
 };
 
-const types = [
-  { id: 'all', name: 'Todos Modelos', icon: Cpu },
-  { id: 'mac', name: 'MacBook', icon: Laptop },
-  { id: 'desktop', name: 'iMac & Mini', icon: Monitor },
-];
-
-const conditions = [
-  { id: 'all', name: 'Qualquer', icon: ListFilter },
-  { id: 'novo', name: 'Novos', icon: Sparkles },
-  { id: 'seminovo', name: 'Seminovos', icon: RefreshCw },
-];
-
 const ProductCard = ({ product }) => {
   const cardRef = useRef(null);
   const magneticRef = useRef(null);
@@ -401,9 +389,7 @@ const ProductCard = ({ product }) => {
   );
 };
 
-const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
-  const [activeType, setActiveType] = useState('all');
-  const [activeCondition, setActiveCondition] = useState('all');
+const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen, activeType, setActiveType, activeCondition, setActiveCondition }) => {
   const gridRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -540,58 +526,6 @@ const CollectionGrid = ({ isMobileFilterOpen, setIsMobileFilterOpen }) => {
           </div>
         </div>
       </section>
-
-      {/* Refined Top Filter Bar */}
-      <div className="sticky top-[72px] md:top-[96px] z-40 bg-white/80 backdrop-blur-2xl border-b border-neutral-100/50 shadow-sm transition-all duration-300 mb-12">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
-          <div className="flex items-center gap-6 md:gap-8 py-4 overflow-x-auto no-scrollbar scroll-smooth">
-            
-            {/* Types Group */}
-            <div className="flex items-center gap-1.5 md:gap-2 pr-4 md:pr-0">
-              {types.map((type) => (
-                <button
-                  key={type.id}
-                  onClick={() => setActiveType(type.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 whitespace-nowrap border ${
-                    activeType === type.id
-                      ? 'bg-neutral-900 text-white border-neutral-900 shadow-lg shadow-black/10'
-                      : 'bg-white text-neutral-500 border-neutral-100 hover:border-neutral-300'
-                  }`}
-                  aria-label={`Filtrar por ${type.name}`}
-                >
-                  <type.icon size={14} strokeWidth={activeType === type.id ? 2.5 : 2} />
-                  <span className="text-[11px] font-bold uppercase tracking-wider">
-                    {type.name}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            <div className="hidden md:block w-px h-6 bg-neutral-100"></div>
-
-            {/* Conditions Group */}
-            <div className="flex items-center gap-1.5 md:gap-2">
-              {conditions.map((cond) => (
-                <button
-                  key={cond.id}
-                  onClick={() => setActiveCondition(cond.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 whitespace-nowrap border ${
-                    activeCondition === cond.id
-                      ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-lg shadow-[#0071e3]/10'
-                      : 'bg-white text-neutral-500 border-neutral-100 hover:border-neutral-300'
-                  }`}
-                  aria-label={`Filtrar por condição ${cond.name}`}
-                >
-                  <cond.icon size={14} strokeWidth={activeCondition === cond.id ? 2.5 : 2} />
-                  <span className="text-[11px] font-bold uppercase tracking-wider">
-                    {cond.name}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Product Grid */}
       <section className="py-12 md:py-24 px-6 md:px-12 lg:px-24">

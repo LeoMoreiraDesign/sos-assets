@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ListFilter } from 'lucide-react';
+import { ListFilter, Cpu, Laptop, Monitor, Sparkles, RefreshCw } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CollectionGrid from './components/CollectionGrid';
@@ -15,11 +15,25 @@ const getImagePath = (path) => {
   return `${cleanBase}${cleanPath}`;
 };
 
+const types = [
+  { id: 'all', name: 'Todos Modelos', icon: Cpu },
+  { id: 'mac', name: 'MacBook', icon: Laptop },
+  { id: 'desktop', name: 'iMac & Mini', icon: Monitor },
+];
+
+const conditions = [
+  { id: 'all', name: 'Qualquer', icon: ListFilter },
+  { id: 'novo', name: 'Novos', icon: Sparkles },
+  { id: 'seminovo', name: 'Seminovos', icon: RefreshCw },
+];
+
 function App() {
   const containerRef = useRef(null);
   const footerRef = useRef(null);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState('products'); // 'products' or 'support'
+  const [activeType, setActiveType] = useState('all');
+  const [activeCondition, setActiveCondition] = useState('all');
 
   const handleFooterMouseMove = (e) => {
     if (!footerRef.current) return;
@@ -39,8 +53,8 @@ function App() {
   return (
     <div ref={containerRef} className="min-h-screen font-sans text-apple-gray antialiased bg-gradient-to-b from-[#dff2fc] via-[#f1f8fc] to-white">
       {/* Dynamic Navigation Header */}
-      <header className="p-6 md:p-8 flex justify-between items-center bg-white/60 backdrop-blur-lg border-b border-white/50 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
+      <header className="flex flex-col bg-white/70 backdrop-blur-xl border-b border-neutral-100/50 sticky top-0 z-50 transition-all duration-300 shadow-sm">
+        <div className="p-4 md:p-6 lg:px-8 flex items-center justify-between max-w-7xl mx-auto w-full">
           <div className="flex items-center">
             <a 
               href="#" 
@@ -55,13 +69,13 @@ function App() {
           <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-500">
             <button 
               onClick={() => navigateTo('products')} 
-              className={`transition-colors ${currentPage === 'products' ? 'text-apple-black font-bold' : 'hover:text-apple-black'}`}
+              className={`transition-colors py-2 ${currentPage === 'products' ? 'text-apple-black font-bold border-b-2 border-apple-black' : 'hover:text-apple-black border-b-2 border-transparent'}`}
             >
               Vitrine
             </button>
             <button 
               onClick={() => navigateTo('support')} 
-              className={`transition-colors ${currentPage === 'support' ? 'text-apple-black font-bold' : 'hover:text-apple-black'}`}
+              className={`transition-colors py-2 ${currentPage === 'support' ? 'text-apple-black font-bold border-b-2 border-apple-black' : 'hover:text-apple-black border-b-2 border-transparent'}`}
             >
               Assistência
             </button>
@@ -78,6 +92,60 @@ function App() {
             </button>
           </div>
         </div>
+
+        {/* Integrated Filter Bar */}
+        {currentPage === 'products' && (
+          <div className="border-t border-neutral-100/50 bg-white/40">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+              <div className="flex items-center gap-4 md:gap-8 py-3 overflow-x-auto no-scrollbar scroll-smooth">
+                
+                {/* Types Group */}
+                <div className="flex items-center gap-1.5 md:gap-2 pr-4 md:pr-0">
+                  {types.map((type) => (
+                    <button
+                      key={type.id}
+                      onClick={() => setActiveType(type.id)}
+                      className={`flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl transition-all duration-300 whitespace-nowrap border ${
+                        activeType === type.id
+                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-lg shadow-black/10'
+                          : 'bg-white text-neutral-500 border-neutral-100 hover:border-neutral-300'
+                      }`}
+                      aria-label={`Filtrar por ${type.name}`}
+                    >
+                      <type.icon size={14} strokeWidth={activeType === type.id ? 2.5 : 2} />
+                      <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-wider">
+                        {type.name}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="hidden md:block w-px h-5 bg-neutral-200/60"></div>
+
+                {/* Conditions Group */}
+                <div className="flex items-center gap-1.5 md:gap-2">
+                  {conditions.map((cond) => (
+                    <button
+                      key={cond.id}
+                      onClick={() => setActiveCondition(cond.id)}
+                      className={`flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl transition-all duration-300 whitespace-nowrap border ${
+                        activeCondition === cond.id
+                          ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-lg shadow-[#0071e3]/10'
+                          : 'bg-white text-neutral-500 border-neutral-100 hover:border-neutral-300'
+                      }`}
+                      aria-label={`Filtrar por condição ${cond.name}`}
+                    >
+                      <cond.icon size={14} strokeWidth={activeCondition === cond.id ? 2.5 : 2} />
+                      <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-wider">
+                        {cond.name}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </header>
 
       <main>
@@ -85,6 +153,10 @@ function App() {
           <CollectionGrid 
             isMobileFilterOpen={isMobileFilterOpen} 
             setIsMobileFilterOpen={setIsMobileFilterOpen} 
+            activeType={activeType}
+            setActiveType={setActiveType}
+            activeCondition={activeCondition}
+            setActiveCondition={setActiveCondition}
           />
         ) : (
           <Support />
