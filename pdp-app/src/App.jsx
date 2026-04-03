@@ -54,7 +54,7 @@ function App() {
     <div ref={containerRef} className="min-h-screen font-sans text-apple-gray antialiased bg-gradient-to-b from-[#dff2fc] via-[#f1f8fc] to-white">
       {/* Dynamic Navigation Header */}
       <header className="flex flex-col bg-white/70 backdrop-blur-xl border-b border-neutral-100/50 sticky top-0 z-50 transition-all duration-300 shadow-sm">
-        <div className="p-4 md:p-6 lg:px-8 flex items-center justify-between max-w-7xl mx-auto w-full">
+        <div className="py-2 px-4 md:py-3 md:px-6 lg:px-8 flex items-center justify-between max-w-7xl mx-auto w-full">
           <div className="flex items-center">
             <a 
               href="#" 
@@ -62,20 +62,20 @@ function App() {
               className="flex items-center justify-center transition-transform hover:scale-105"
               aria-label="Página Inicial - Leo Design"
             >
-              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design Logo" className="h-12 md:h-16 w-auto object-contain" />
+              <img src={getImagePath("/Webp_logo_leo_design_web_sites@4x.webp")} alt="Leo Design Logo" className="h-8 md:h-10 w-auto object-contain" />
             </a>
           </div>
           
-          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-neutral-500">
+          <div className="hidden md:flex items-center gap-6 text-sm font-semibold text-neutral-500">
             <button 
               onClick={() => navigateTo('products')} 
-              className={`transition-colors py-2 ${currentPage === 'products' ? 'text-apple-black font-bold border-b-2 border-apple-black' : 'hover:text-apple-black border-b-2 border-transparent'}`}
+              className={`transition-colors py-1 ${currentPage === 'products' ? 'text-apple-black font-bold border-b-2 border-apple-black' : 'hover:text-apple-black border-b-2 border-transparent'}`}
             >
               Vitrine
             </button>
             <button 
               onClick={() => navigateTo('support')} 
-              className={`transition-colors py-2 ${currentPage === 'support' ? 'text-apple-black font-bold border-b-2 border-apple-black' : 'hover:text-apple-black border-b-2 border-transparent'}`}
+              className={`transition-colors py-1 ${currentPage === 'support' ? 'text-apple-black font-bold border-b-2 border-apple-black' : 'hover:text-apple-black border-b-2 border-transparent'}`}
             >
               Assistência
             </button>
@@ -86,57 +86,57 @@ function App() {
           <div className="md:hidden flex items-center gap-2">
             <button 
               onClick={() => navigateTo('support')}
-              className="px-3 py-1.5 text-xs font-semibold text-[#0071e3] bg-[#0071e3]/5 border border-[#0071e3]/10 rounded-lg"
+              className="px-3 py-1 text-xs font-semibold text-[#0071e3] bg-[#0071e3]/5 border border-[#0071e3]/10 rounded-lg"
             >
               Suporte
             </button>
           </div>
         </div>
 
-        {/* Integrated Filter Bar */}
+        {/* Integrated Filter Bar - Ultra Compact */}
         {currentPage === 'products' && (
           <div className="border-t border-neutral-100/50 bg-white/40">
             <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-              <div className="flex items-center gap-4 md:gap-8 py-3 overflow-x-auto no-scrollbar scroll-smooth">
+              <div className="flex items-center gap-4 md:gap-6 py-1.5 md:py-2 overflow-x-auto no-scrollbar scroll-smooth">
                 
                 {/* Types Group */}
-                <div className="flex items-center gap-1.5 md:gap-2 pr-4 md:pr-0">
+                <div className="flex items-center gap-1.5 pr-4 md:pr-0">
                   {types.map((type) => (
                     <button
                       key={type.id}
                       onClick={() => setActiveType(type.id)}
-                      className={`flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl transition-all duration-300 whitespace-nowrap border ${
+                      className={`flex items-center gap-1.5 px-3 py-1 md:py-1.5 rounded-lg transition-all duration-300 whitespace-nowrap border ${
                         activeType === type.id
-                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-lg shadow-black/10'
+                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-sm'
                           : 'bg-white text-neutral-500 border-neutral-100 hover:border-neutral-300'
                       }`}
                       aria-label={`Filtrar por ${type.name}`}
                     >
-                      <type.icon size={14} strokeWidth={activeType === type.id ? 2.5 : 2} />
-                      <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-wider">
+                      <type.icon size={12} strokeWidth={activeType === type.id ? 2.5 : 2} />
+                      <span className="text-[10px] font-bold uppercase tracking-wider">
                         {type.name}
                       </span>
                     </button>
                   ))}
                 </div>
 
-                <div className="hidden md:block w-px h-5 bg-neutral-200/60"></div>
+                <div className="hidden md:block w-px h-4 bg-neutral-200/60"></div>
 
                 {/* Conditions Group */}
-                <div className="flex items-center gap-1.5 md:gap-2">
+                <div className="flex items-center gap-1.5">
                   {conditions.map((cond) => (
                     <button
                       key={cond.id}
                       onClick={() => setActiveCondition(cond.id)}
-                      className={`flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-xl transition-all duration-300 whitespace-nowrap border ${
+                      className={`flex items-center gap-1.5 px-3 py-1 md:py-1.5 rounded-lg transition-all duration-300 whitespace-nowrap border ${
                         activeCondition === cond.id
-                          ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-lg shadow-[#0071e3]/10'
+                          ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-sm'
                           : 'bg-white text-neutral-500 border-neutral-100 hover:border-neutral-300'
                       }`}
                       aria-label={`Filtrar por condição ${cond.name}`}
                     >
-                      <cond.icon size={14} strokeWidth={activeCondition === cond.id ? 2.5 : 2} />
-                      <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-wider">
+                      <cond.icon size={12} strokeWidth={activeCondition === cond.id ? 2.5 : 2} />
+                      <span className="text-[10px] font-bold uppercase tracking-wider">
                         {cond.name}
                       </span>
                     </button>
