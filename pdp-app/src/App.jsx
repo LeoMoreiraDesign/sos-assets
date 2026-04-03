@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ListFilter, Cpu, Laptop, Monitor, Sparkles, RefreshCw } from 'lucide-react';
+import { ListFilter, Cpu, Laptop, Monitor, Sparkles, RefreshCw, X } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CollectionGrid from './components/CollectionGrid';
@@ -137,54 +137,79 @@ function App() {
           </div>
         </div>
 
-        {/* Integrated Filter Bar - Ultra Compact */}
+        {/* Integrated Filter Popup Modal */}
         {currentPage === 'products' && isFilterBarOpen && (
-          <div className="border-t border-neutral-100/50 bg-white/40">
-            <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-              <div className="flex items-center gap-4 md:gap-6 py-1.5 md:py-2 overflow-x-auto no-scrollbar scroll-smooth">
-                
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <div 
+              className="absolute inset-0 bg-black/20 backdrop-blur-sm transition-opacity cursor-pointer"
+              onClick={() => setIsFilterBarOpen(false)}
+              aria-label="Fechar Filtros"
+            />
+            
+            {/* Popup Container */}
+            <div className="relative w-full max-w-sm bg-white/70 backdrop-blur-3xl rounded-[2rem] shadow-[0_0_60px_-15px_rgba(0,113,227,0.3)] border border-white/60 p-6 pb-8 transform transition-all">
+              
+              {/* Header with Close Button */}
+              <div className="flex items-center justify-between mb-8">
+                <h3 className="text-sm font-bold text-neutral-900 tracking-wide uppercase flex items-center gap-2">
+                  <ListFilter size={16} className="text-[#0071e3]" />
+                  Filtros
+                </h3>
+                <button 
+                  onClick={() => setIsFilterBarOpen(false)}
+                  className="p-1.5 rounded-full hover:bg-black/5 text-neutral-500 transition-colors"
+                  aria-label="Fechar"
+                >
+                  <X size={18} strokeWidth={2.5}/>
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-6">
                 {/* Types Group */}
-                <div className="flex items-center gap-1.5 pr-4 md:pr-0">
-                  {types.map((type) => (
-                    <button
-                      key={type.id}
-                      onClick={() => setActiveType(type.id)}
-                      className={`flex items-center gap-1.5 px-3 py-1 md:py-1.5 rounded-lg transition-all duration-300 whitespace-nowrap border ${
-                        activeType === type.id
-                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-sm'
-                          : 'bg-white text-neutral-500 border-neutral-100 hover:border-neutral-300'
-                      }`}
-                      aria-label={`Filtrar por ${type.name}`}
-                    >
-                      <type.icon size={12} strokeWidth={activeType === type.id ? 2.5 : 2} />
-                      <span className="text-[10px] font-bold uppercase tracking-wider">
-                        {type.name}
-                      </span>
-                    </button>
-                  ))}
+                <div>
+                  <h4 className="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-3">Linha Mac</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {types.map((type) => (
+                      <button
+                        key={type.id}
+                        onClick={() => { setActiveType(type.id); setIsFilterBarOpen(false); }}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 border ${
+                          activeType === type.id
+                            ? 'bg-neutral-900 text-white border-neutral-900 shadow-md'
+                            : 'bg-white/50 text-neutral-600 border-neutral-200/80 hover:border-neutral-300 hover:bg-white'
+                        }`}
+                      >
+                        <type.icon size={14} strokeWidth={activeType === type.id ? 2.5 : 2} />
+                        <span className="text-[11px] font-bold uppercase tracking-wider">
+                          {type.name}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
-                <div className="hidden md:block w-px h-4 bg-neutral-200/60"></div>
-
                 {/* Conditions Group */}
-                <div className="flex items-center gap-1.5">
-                  {conditions.map((cond) => (
-                    <button
-                      key={cond.id}
-                      onClick={() => setActiveCondition(cond.id)}
-                      className={`flex items-center gap-1.5 px-3 py-1 md:py-1.5 rounded-lg transition-all duration-300 whitespace-nowrap border ${
-                        activeCondition === cond.id
-                          ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-sm'
-                          : 'bg-white text-neutral-500 border-neutral-100 hover:border-neutral-300'
-                      }`}
-                      aria-label={`Filtrar por condição ${cond.name}`}
-                    >
-                      <cond.icon size={12} strokeWidth={activeCondition === cond.id ? 2.5 : 2} />
-                      <span className="text-[10px] font-bold uppercase tracking-wider">
-                        {cond.name}
-                      </span>
-                    </button>
-                  ))}
+                <div>
+                  <h4 className="text-xs font-bold text-neutral-400 uppercase tracking-widest mb-3">Condição</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {conditions.map((cond) => (
+                      <button
+                        key={cond.id}
+                        onClick={() => { setActiveCondition(cond.id); setIsFilterBarOpen(false); }}
+                        className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 border ${
+                          activeCondition === cond.id
+                            ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-md shadow-[#0071e3]/20'
+                            : 'bg-white/50 text-neutral-600 border-neutral-200/80 hover:border-neutral-300 hover:bg-white'
+                        }`}
+                      >
+                        <cond.icon size={14} strokeWidth={activeCondition === cond.id ? 2.5 : 2} />
+                        <span className="text-[11px] font-bold uppercase tracking-wider">
+                          {cond.name}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
