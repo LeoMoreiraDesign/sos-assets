@@ -114,25 +114,34 @@ function App() {
 
             {/* Quick Mobile Navigation */}
             <div className="md:hidden flex items-center gap-2">
-              {currentPage === 'products' && (
+              {currentPage === 'products' ? (
+                <>
+                  <button 
+                    onClick={() => setIsFilterBarOpen(!isFilterBarOpen)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all ${
+                      isFilterBarOpen 
+                        ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-md shadow-[#0071e3]/20' 
+                        : 'text-[#0071e3] bg-[#0071e3]/5 border-[#0071e3]/10 hover:bg-[#0071e3]/10'
+                    }`}
+                  >
+                    <ListFilter size={12} strokeWidth={2.5} />
+                    <span>Filtros</span>
+                  </button>
+                  <button 
+                    onClick={() => navigateTo('support')}
+                    className="px-3 py-1.5 text-xs font-semibold text-neutral-600 bg-neutral-100/80 hover:bg-neutral-200 border border-neutral-200 rounded-lg transition-colors"
+                  >
+                    Suporte
+                  </button>
+                </>
+              ) : (
                 <button 
-                  onClick={() => setIsFilterBarOpen(!isFilterBarOpen)}
-                  className={`flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-lg border transition-all ${
-                    isFilterBarOpen 
-                      ? 'bg-[#0071e3] text-white border-[#0071e3] shadow-md shadow-[#0071e3]/20' 
-                      : 'text-[#0071e3] bg-[#0071e3]/5 border-[#0071e3]/10 hover:bg-[#0071e3]/10'
-                  }`}
+                  onClick={() => navigateTo('products')}
+                  className="px-3 py-1.5 text-xs font-semibold text-[#0071e3] bg-[#0071e3]/5 hover:bg-[#0071e3]/10 border border-[#0071e3]/10 rounded-lg transition-colors flex items-center gap-1"
                 >
-                  <ListFilter size={12} strokeWidth={2.5} />
-                  <span>Filtros</span>
+                  Vitrine
                 </button>
               )}
-              <button 
-                onClick={() => navigateTo('support')}
-                className="px-3 py-1 text-xs font-semibold text-neutral-600 bg-neutral-100 border border-neutral-200 rounded-lg"
-              >
-                Suporte
-              </button>
             </div>
           </div>
         </div>

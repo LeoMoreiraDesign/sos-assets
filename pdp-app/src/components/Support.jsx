@@ -328,10 +328,10 @@ const Support = () => {
               href="https://api.whatsapp.com/send?phone=5511981765177&text=Olá! Gostaria de um orçamento para assistência técnica em meu dispositivo Apple."
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-[#0071e3] text-white hover:bg-white hover:text-[#0071e3] transition-all duration-500 px-12 py-3 md:py-4 rounded-full font-semibold text-sm md:text-base flex items-center gap-2.5 md:gap-3 shadow-xl hover:shadow-[#0071e3]/40"
+              className="group bg-[#0071e3] text-white hover:bg-white hover:text-[#0071e3] transition-all duration-500 px-6 py-3 md:px-12 md:py-4 rounded-full font-semibold text-xs sm:text-sm md:text-base flex items-center justify-center gap-2 md:gap-3 shadow-xl hover:shadow-[#0071e3]/40 w-fit whitespace-nowrap"
               aria-label="Solicitar orçamento gratuito pelo WhatsApp"
             >
-              <img src={getImagePath("/logo azul WhatsAppWebP.webp")} alt="WhatsApp" className="w-6 h-6 md:w-7 md:h-7 object-cover rounded-full transition-all duration-500 transform group-hover:scale-110" />
+              <img src={getImagePath("/logo azul WhatsAppWebP.webp")} alt="WhatsApp" className="w-5 h-5 md:w-7 md:h-7 object-cover rounded-full transition-all duration-500 transform group-hover:scale-110" />
               <span>Solicitar Orçamento Grátis</span>
             </a>
           </div>
